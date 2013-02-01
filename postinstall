@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+require 'fileutils'
+
+path = "#{ENV['HOME']}/current/public/system"
+
+if File.directory?(path)
+  FileUtils.mv(path, "#{path}.old")
+elsif File.symlink?(path)
+  FileUtils.rm(path)
+end
+
+FileUtils.symlink("#{ENV['HOME']}/images", path)
